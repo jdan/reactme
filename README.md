@@ -9,7 +9,7 @@ Inspired by: http://blog.vjeux.com/2015/javascript/challenge-best-javascript-set
 ### Try it out
 
 ```
-$ git clone git@github.com:jdan/react-share
+$ git clone https://github.com/jdan/react-share
 $ cd react-share
 $ npm install
 $ npm start
