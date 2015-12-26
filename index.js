@@ -1,9 +1,20 @@
+"use strict";
+
 const koa = require("koa");
 const app = koa();
 
 app.use(function *(next) {
-    this.body = "Hello, world!";
-    yield next;
+    const path = this.request.path
+
+    let component;
+    try {
+        component = require("." + path);
+    } catch (e) {
+        component = () => `Could not find module at ${path}`;
+    } finally {
+        this.body = component();
+        yield next;
+    }
 });
 
 const port = process.env.PORT || 3000;
