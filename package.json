@@ -9,5 +9,8 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "webpack": "^1.12.9"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
