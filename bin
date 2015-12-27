@@ -1,19 +1,42 @@
+#!/usr/bin/env node
+
 "use strict";
 
 const connect = require("connect");
-const fs = require("fs");
 const http = require("http");
+const fs = require("fs");
 const MemoryFS = require("memory-fs");
+const path = require("path");
 const webpack = require("webpack");
 
 const app = connect();
 const memoryFs = new MemoryFS();
 
 app.use(function(req, res) {
-    const path = req.url;
+    const requirePath = path.join(
+        path.relative(__dirname, process.cwd()),
+        req.url
+    );
 
-    if (!fs.existsSync("." + path)) {
-        return res.end(`No module found at ${path}`);
+    // chdir here so relative requires work
+    process.chdir(__dirname);
+
+    if (req.url === "/") {
+        res.end(`<pre>
+Welcome!
+
+Go ahead and put some react components in here.
+
+$ echo 'import React from "react"; export default () => &lt;div&gt;Hello, world\!&lt;/div&gt;' > HelloWorld.js
+
+Then go here: <a href="/HelloWorld.js">http://localhost:3000/HelloWorld.js</a>
+
+Thanks!
+        </pre>`);
+    }
+
+    if (!fs.existsSync(requirePath)) {
+        return res.end(`No module found at ${req.url}`);
     }
 
     const compiler = webpack({
@@ -36,7 +59,7 @@ app.use(function(req, res) {
         },
         plugins: [
             new webpack.DefinePlugin({
-                REQUIRE_PATH: JSON.stringify("." + path),
+                REQUIRE_PATH: JSON.stringify(requirePath),
             }),
         ],
     });

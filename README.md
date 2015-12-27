@@ -9,6 +9,14 @@ Inspired by: http://blog.vjeux.com/2015/javascript/challenge-best-javascript-set
 ### Try it out
 
 ```
+$ npm install -g reactme
+$ reactme
+$ open http://localhost:3000
+```
+
+### Develop
+
+```
 $ git clone https://github.com/jdan/reactme
 $ cd reactme
 $ npm install
