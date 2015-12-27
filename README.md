@@ -1,4 +1,4 @@
-## react-share
+## reactme
 
 A little server to share react components.
 
@@ -9,8 +9,8 @@ Inspired by: http://blog.vjeux.com/2015/javascript/challenge-best-javascript-set
 ### Try it out
 
 ```
-$ git clone https://github.com/jdan/react-share
-$ cd react-share
+$ git clone https://github.com/jdan/reactme
+$ cd reactme
 $ npm install
 $ npm start
 $ open http://localhost:3000/Name.jsx
